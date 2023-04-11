@@ -19,27 +19,27 @@ public class HallController {
     HallService hallService;
 
     @PostMapping("/add")
-    public ResponseEntity<Hall> addNewHall(HallDTO hallDTO){
+    public ResponseEntity<Hall> addNewHall(HallDTO hallDTO) {
         return new ResponseEntity<>(hallService.createNewHall(hallDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Hall>> getAllHall(){
-        return new ResponseEntity<>(hallService.getAllHalls(),HttpStatus.OK);
+    public ResponseEntity<List<Hall>> getAllHall() {
+        return new ResponseEntity<>(hallService.getAllHalls(), HttpStatus.OK);
     }
 
     @GetMapping("/byId")
-    public ResponseEntity<Optional<Hall>> getHallsById(@RequestParam Long hallId){
-        return new ResponseEntity<>(hallService.getHallById(hallId),HttpStatus.OK);
+    public ResponseEntity<Optional<Hall>> getHallsById(@RequestParam Long hallId) {
+        return new ResponseEntity<>(hallService.getHallById(hallId), HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Hall> updateHall(@RequestBody HallDTO hallDTO){
-        return new ResponseEntity<>(hallService.updateHall(hallDTO),HttpStatus.OK);
+    public ResponseEntity<Hall> updateHall(@RequestBody HallDTO hallDTO) {
+        return new ResponseEntity<>(hallService.updateHall(hallDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteHall(@RequestParam Long hallId){
+    public ResponseEntity<String> deleteHall(@RequestParam Long hallId) {
         String status = hallService.deleteHall(hallId);
         return ResponseEntity.ok(status);
     }

@@ -22,8 +22,8 @@ public class Hall {
     @JsonIgnore
     private Movie movie;
 
-    public Hall(Movie movie){
-        this.movie=movie;
+    public Hall(Movie movie) {
+        this.movie = movie;
     }
 
     public Hall(Long numberOfSeat) {

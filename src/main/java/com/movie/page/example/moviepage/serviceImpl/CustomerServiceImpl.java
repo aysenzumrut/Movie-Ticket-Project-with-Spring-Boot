@@ -26,11 +26,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer createNewCustomer(CustomerDTO customerDTO) {
-        Customer customer=new Customer();
+        Customer customer = new Customer();
         customer.setName(customerDTO.getName());
         customer.setEmail(customerDTO.getEmail());
         customer.setCreatedAt(new Date());
-        Optional<Movie> movie= movieRepository.findById(customerDTO.getMovieId());
+        Optional<Movie> movie = movieRepository.findById(customerDTO.getMovieId());
         customer.setMovie(movie.get());
         return customerRepository.save(customer);
     }
@@ -47,10 +47,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer updateCustomer(CustomerDTO customerDTO) {
-        Optional<Customer> customer=customerRepository.findById(customerDTO.getCustomerId());
+        Optional<Customer> customer = customerRepository.findById(customerDTO.getCustomerId());
         Customer changedCustomer;
-        if (customer.isPresent()){
-            changedCustomer=customer.get();
+        if (customer.isPresent()) {
+            changedCustomer = customer.get();
             changedCustomer.setName(customerDTO.getName());
             changedCustomer.setEmail(customerDTO.getEmail());
             changedCustomer.setUpdatedAt(new Date());
@@ -61,11 +61,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer addMovie(Long customerId, CustomerMovieDTO customerMovieDTO) {
-        Optional<Customer> customer1=customerRepository.findById(customerId);
+        Optional<Customer> customer1 = customerRepository.findById(customerId);
         Customer newCustomer;
         Optional<Movie> movie1 = movieRepository.findById(customerMovieDTO.getMovieId());
-        if (customer1.isPresent() && movie1.isPresent()){
-            newCustomer=customer1.get();
+        if (customer1.isPresent() && movie1.isPresent()) {
+            newCustomer = customer1.get();
             newCustomer.setMovie(movie1.get());
             newCustomer.setUpdatedAt(new Date());
             return customerRepository.save(newCustomer);
@@ -75,8 +75,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public String deleteCustomer(Long customerId) {
-        Optional<Customer> customer=customerRepository.findById(customerId);
-        if (customer.isPresent()){
+        Optional<Customer> customer = customerRepository.findById(customerId);
+        if (customer.isPresent()) {
             customerRepository.deleteById(customerId);
             return "Kullanıcı Silme İşlemi Başarılı...";
         }

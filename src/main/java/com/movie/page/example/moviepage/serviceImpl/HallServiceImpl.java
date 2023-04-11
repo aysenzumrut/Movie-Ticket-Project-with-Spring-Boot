@@ -19,7 +19,7 @@ public class HallServiceImpl implements HallService {
 
     @Override
     public Hall createNewHall(HallDTO hallDTO) {
-        Hall hall=new Hall();
+        Hall hall = new Hall();
         hall.setHallId(hallDTO.getHallId());
         hall.setNumberOfSeat(hallDTO.getNumberOfSeat());
         return hallRepository.save(hall);
@@ -37,10 +37,10 @@ public class HallServiceImpl implements HallService {
 
     @Override
     public Hall updateHall(HallDTO hallDTO) {
-        Optional<Hall> hallControl=hallRepository.findById(hallDTO.getHallId());
+        Optional<Hall> hallControl = hallRepository.findById(hallDTO.getHallId());
         Hall changedHall;
-        if (hallControl.isPresent()){
-            changedHall=hallControl.get();
+        if (hallControl.isPresent()) {
+            changedHall = hallControl.get();
             changedHall.setNumberOfSeat(hallDTO.getNumberOfSeat());
             return hallRepository.save(changedHall);
         }
@@ -49,8 +49,8 @@ public class HallServiceImpl implements HallService {
 
     @Override
     public String deleteHall(Long hallId) {
-        Optional<Hall> hall=hallRepository.findById(hallId);
-        if (hall.isPresent()){
+        Optional<Hall> hall = hallRepository.findById(hallId);
+        if (hall.isPresent()) {
             hallRepository.deleteById(hallId);
             return "Salon Silme İşlemi Başarılı...";
         }

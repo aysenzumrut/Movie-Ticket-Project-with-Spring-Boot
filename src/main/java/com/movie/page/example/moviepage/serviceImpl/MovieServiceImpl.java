@@ -7,11 +7,13 @@ import com.movie.page.example.moviepage.repositories.HallRepository;
 import com.movie.page.example.moviepage.repositories.MovieRepository;
 import com.movie.page.example.moviepage.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
-import java.util.List;
 import java.util.Optional;
 import java.util.TimeZone;
 
@@ -24,22 +26,23 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie createNewMovie(MovieDTO movieDTO) {
-        Movie movie=new Movie();
+        Movie movie = new Movie();
         movie.setName(movieDTO.getName());
         String pattern = "yyyy/MM/dd HH:mm:ss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone(ZoneId.of ( "Europe/Istanbul" )));
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone(ZoneId.of("Europe/Istanbul")));
         String date = simpleDateFormat.format(movieDTO.getDate());
         System.out.println(date);
         movie.setDate(movieDTO.getDate());
-        Optional<Hall> hall= hallRepository.findById(movieDTO.getHallId());
+        Optional<Hall> hall = hallRepository.findById(movieDTO.getHallId());
         movie.setHall(hall.orElseGet(() -> hallRepository.save(new Hall(movieDTO.getNumberOfSeat()))));
         return movieRepository.save(movie);
     }
 
     @Override
-    public List<Movie> getAllMovies() {
-        return movieRepository.findAll();
+    public Page<Movie> getAllMovies(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return movieRepository.findAll(pageable);
     }
 
     @Override
@@ -49,10 +52,10 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie updateMovie(MovieDTO movieDTO) {
-        Optional<Movie> movieControl=movieRepository.findById(movieDTO.getMovieId());
+        Optional<Movie> movieControl = movieRepository.findById(movieDTO.getMovieId());
         Movie changedMovie;
-        if (movieControl.isPresent()){
-            changedMovie=movieControl.get();
+        if (movieControl.isPresent()) {
+            changedMovie = movieControl.get();
             changedMovie.setName(movieDTO.getName());
             return movieRepository.save(changedMovie);
         }
@@ -61,8 +64,8 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public String deleteMovie(Long movieId) {
-        Optional<Movie> movie=movieRepository.findById(movieId);
-        if (movie.isPresent()){
+        Optional<Movie> movie = movieRepository.findById(movieId);
+        if (movie.isPresent()) {
             movieRepository.deleteById(movieId);
             return "Film Listeden Çıkarılmıştır...";
         }

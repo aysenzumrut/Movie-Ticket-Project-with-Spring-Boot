@@ -2,8 +2,6 @@ package com.movie.page.example.moviepage.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.movie.page.example.moviepage.dto.CustomerDTO;
-import com.movie.page.example.moviepage.dto.CustomerMovieDTO;
 import com.movie.page.example.moviepage.dto.MovieDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -35,11 +33,11 @@ public class Movie {
     @JoinColumn(name = "hallId")
     private Hall hall;
 
-    public Movie(MovieDTO movieDTO,Hall hall,Customer customer){
-        this.movieId=movieDTO.getMovieId();
-        this.name=movieDTO.getName();
-        this.hall=hall;
-        this.customers= (List<Customer>) customer;
+    public Movie(MovieDTO movieDTO, Hall hall, Customer customer) {
+        this.movieId = movieDTO.getMovieId();
+        this.name = movieDTO.getName();
+        this.hall = hall;
+        this.customers = (List<Customer>) customer;
     }
 
 

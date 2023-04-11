@@ -19,32 +19,32 @@ public class CustomerController {
     CustomerService customerService;
 
     @PostMapping("/new")
-    public ResponseEntity<Customer> addNewCustomer(CustomerDTO customerDTO){
-        return new ResponseEntity<>(customerService.createNewCustomer(customerDTO),HttpStatus.CREATED);
+    public ResponseEntity<Customer> addNewCustomer(CustomerDTO customerDTO) {
+        return new ResponseEntity<>(customerService.createNewCustomer(customerDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Customer>> getAllCustomers(){
+    public ResponseEntity<List<Customer>> getAllCustomers() {
         return new ResponseEntity<>(customerService.getAllCustomers(), HttpStatus.OK);
     }
 
     @GetMapping("/byId")
-    public ResponseEntity<Optional<Customer>> getCustomer(@RequestParam Long customerId){
-        return new ResponseEntity<>(customerService.getUserById(customerId),HttpStatus.OK);
+    public ResponseEntity<Optional<Customer>> getCustomer(@RequestParam Long customerId) {
+        return new ResponseEntity<>(customerService.getUserById(customerId), HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Customer> updateCustomer(@RequestBody CustomerDTO customerDTO){
-        return new ResponseEntity<>(customerService.updateCustomer(customerDTO),HttpStatus.OK);
+    public ResponseEntity<Customer> updateCustomer(@RequestBody CustomerDTO customerDTO) {
+        return new ResponseEntity<>(customerService.updateCustomer(customerDTO), HttpStatus.OK);
     }
 
     @PutMapping("/addMovie")
-    public ResponseEntity<Customer> addMovie(@RequestParam Long customerId,@RequestBody CustomerMovieDTO customerMovieDTO){
-        return new ResponseEntity<>(customerService.addMovie(customerId,customerMovieDTO),HttpStatus.OK);
+    public ResponseEntity<Customer> addMovie(@RequestParam Long customerId, @RequestBody CustomerMovieDTO customerMovieDTO) {
+        return new ResponseEntity<>(customerService.addMovie(customerId, customerMovieDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteCustomer(@RequestParam Long customerId){
+    public ResponseEntity<String> deleteCustomer(@RequestParam Long customerId) {
         String status = customerService.deleteCustomer(customerId);
         return ResponseEntity.ok(status);
     }

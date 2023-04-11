@@ -1,6 +1,5 @@
 package com.movie.page.example.moviepage.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 
